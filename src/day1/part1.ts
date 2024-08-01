@@ -1,14 +1,12 @@
 const file = Bun.file("./input.txt");
 const data = await file.text();
 
-let sum = 0;
-const digits = data.trim().split("").map(Number);
+const parsedData = data.split('\n').map((item) => Number(item));
 
-for (let i = 0; i < digits.length; i++) {
-  const currDigit = digits[i];
-  const nextDigit = digits[(i + 1) % digits.length];
+let result = 0;
 
-  if (currDigit === nextDigit) sum += currDigit;
-}
+parsedData.forEach((item) => {
+  result += item;
+})
 
-console.log(sum);
+console.log(result);
