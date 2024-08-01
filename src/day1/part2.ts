@@ -1,15 +1,22 @@
 const file = Bun.file("./input.txt");
 const data = await file.text();
 
-let sum = 0;
-const digits = data.trim().split("").map(Number);
-const halfLength = digits.length / 2;
+const parsedData = data.split("\n").map((item) => Number(item));
 
-for (let i = 0; i < digits.length; i++) {
-  const currDigit = digits[i];
-  const halfwayDigit = digits[(i + halfLength) % digits.length];
+const freqMap: Record<number, number> = {};
 
-  if (currDigit === halfwayDigit) sum += currDigit;
+let curFreq = 0;
+let found = false;
+while (!found) {
+  for (const item of parsedData) {
+    curFreq += item;
+
+    if (curFreq in freqMap) {
+      console.log("First frequency reached twice:", curFreq);
+      found = true;
+      break;
+    }
+
+    freqMap[curFreq] = 1;
+  }
 }
-
-console.log(sum);
