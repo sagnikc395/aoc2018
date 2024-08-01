@@ -3,12 +3,13 @@ const data = await file.text();
 
 let sum = 0;
 const digits = data.trim().split("").map(Number);
+const halfLength = digits.length / 2;
 
 for (let i = 0; i < digits.length; i++) {
   const currDigit = digits[i];
-  const nextDigit = digits[(i + 1) % digits.length];
+  const halfwayDigit = digits[(i + halfLength) % digits.length];
 
-  if (currDigit === nextDigit) sum += currDigit;
+  if (currDigit === halfwayDigit) sum += currDigit;
 }
 
 console.log(sum);
